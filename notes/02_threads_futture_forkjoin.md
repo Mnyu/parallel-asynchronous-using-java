@@ -1,4 +1,4 @@
-## Asynchronous and Parallel Programming prior to Java 8
+# Asynchronous and Parallel Programming prior to Java 8
 
 - Threads
 - Futures
@@ -6,7 +6,7 @@
 - Limitations
 
 
-### Threads API:
+## Threads API:
 
 - Threads API got introduced in Java1
 - Threads are basically used to offload the blocking tasks as background tasks.
@@ -21,22 +21,22 @@
 - Thread API nowadays can be considered as very low level API.
 - Easy to introduce complexity in code when trying to implement Async operations using Thread API.
 - Threads, in general, are expensive.
-    - Because threads have their won runtime-stack, memory, registers etc.
+    - Because threads have their own runtime-stack, memory, registers etc.
     - This is the reason why creating and destroying the thread is an expensive process.
 
-### ThreadPool, ExecutorService & Future :
+## ThreadPool, ExecutorService & Future :
 
-### ThreadPool
+## ThreadPool
 
 - To overcome the limitations of Threads (majorly the expensive creation & destruction of threads), Thread Pool was created.
 - ```Thread Pool : group of threads that are created and readily available to handle any work submitted to them.```
-- Thread Pool will typically have a ```work queue``` and thread pull new work from that queue.
+- Thread Pool will typically have a ```work queue``` and threads pull new work from that queue.
 
 
-- Thread Pool Size considerations:
+- **Thread Pool Size considerations:**
   - **CPU intensive tasks** (Complex mathematical calculation or any algorithm related computation), then
     - ```Thread Pool Size = No of Cores```
-    - Because at ny given time, the number of tasks that can be run in parallel = no of cores in the machine.
+    - Because at any given time, the number of tasks that can be run in parallel = no of cores in the machine.
   - **I/O intensive tasks** (REST API calls or DB calls), then
     - ```Thread Pool Size > No of Cores```
     - Because the thread executing the task will be waiting for the most part.
@@ -47,25 +47,25 @@
 - Achieve concurrency in our application.
 
 
-### ExecutorService
+## ExecutorService
 
-- Released as part of Java5.
+- Released as part of Java 5.
 - ExecutorService in Java is an **Asynchronous Task Execution Engine.**
 - It provides a way to asynchronously execute tasks and provides the results in a much simpler way compared to threads.
-- This enabled coarse-grained task based parallelism in Java.
+- This has enabled coarse-grained ```Task based parallelism``` in Java.
 
-#### ExecutorService Components :
-1. Thread Pool
-2. WorkQueue - ```Blocking Queue```
+### ExecutorService Components :
+1. **Thread Pool**
+2. **WorkQueue** - ```Blocking Queue```
    1. Any time a client submits a task for the executor service, the task will be placed in the work queue.
-3. CompletionQueue
+3. **CompletionQueue**
    1. Tasks completed by threads are placed in the completion queue.
 
-#### Working :
+### Working :
 ![Image1](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/executor-service-work.png)
 
 
-#### Limitations :
+### Limitations :
 - Executor Service is designed to block threads.
 - Since executor service returns a ```Future``` and the ```main/calling thread``` has to call ```future.get()```, implies that the ```main/calling thread``` is blocked until the ```future.get()``` returns.
 - Though ```future.get()``` has a timeout variation but that does not serve the purpose fully as we will be timing out the task, but we won't be getting the desired result.
@@ -73,9 +73,9 @@
 
 
 
-### Fork-Join Framework :
+## Fork-Join Framework :
 
- - This got introduced as part of Java7.
+ - This got introduced as part of Java 7.
  - This is an **extension of ExecutorService**.
  - ExecutorService is designed to achieve ```Task Based Parallelism```.
 
@@ -84,12 +84,12 @@
  
 - Fork/Join framework is designed to achieve ```Data Parallelism```.
  
-#### Data Parallelism :
+### Data Parallelism :
 
 - Data Parallelism is a concept where a given ```Task``` is ```recursively``` split into ```Sub-Tasks``` until it reaches its least possible size and then execute those ```Sub-Tasks``` in parallel.
 - Basically it uses the ```divide & conquer``` approach.
 
-#### Working :
+### Working :
 
 - Fork-Join framework has a dedicated pool, ```ForkJoin Pool``` to support Data Parallelism.
 - ```ForkJoin Task``` :
@@ -104,10 +104,12 @@
 
 ![Image2](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/fork-join-pool.png)
 
+
+### ForkJoin Task :
 ![Image3](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/fork-join-task.png)
 
 
-#### Limitations :
+### Limitations :
 
 - Code using Fork Join framework is really complex and not developer friendly.
   - Java 8 streams API really simplified the usage.
