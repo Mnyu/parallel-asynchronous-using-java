@@ -61,7 +61,6 @@
 3. **CompletionQueue**
    1. Tasks completed by threads are placed in the completion queue.
 
-### Working :
 ![Image1](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/executor-service-work.png)
 
 
