@@ -44,7 +44,7 @@
 
 ## Evolution of Concurrency and Parallelism APIs in Java :
 
-![Image1](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/main/src/image.png)
+![Image1](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/evolution.png)
 
 
 ## Concurrency v/s Parallelism :
@@ -62,9 +62,9 @@
   - Single Core : Tasks are running in interleaved fashion as there is only 1 core, CPU which has a scheduler that takes care of scheduling these multiple threads.
   - Multiple Cores : Tasks are running simultaneously
 
-![Image2](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/main/src/image.png)
+![Image2](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/cores.png)
 
-![Image3](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/main/src/image.png)
+![Image3](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/concurrency-example.png)
 
 
 ## Parallelism
@@ -78,11 +78,11 @@
 
 - Whole process is also called **Fork & Join**.
 
-![Image4](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/main/src/image.png)
+![Image4](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/parallel-example.png)
 
-![Image5](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/main/src/image.png)
+![Image5](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/parallel-code.png)
 
-![Image6](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/main/src/image.png)
+![Image6](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/con-par-compare.png)
 
 
 
