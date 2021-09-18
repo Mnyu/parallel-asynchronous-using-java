@@ -20,7 +20,7 @@
 - Interesting results when compared with LinkedList.
 
 #### Test Results of use-case where input list is LinkedList :
-- Performance difference between SEQUENTIAL and PARALLEL stream for the above use case where input list is LinkedList very significant.
+- Performance difference between SEQUENTIAL and PARALLEL stream for the above use case where input list is LinkedList is very significant.
 - Parallel streams are slower.
 - The is because LinkedList is a type of collection which is difficult to split into chunks.
 
@@ -37,3 +37,24 @@
 - **If the Collection can be split easily, then only parallel streams will improve the overall performance of the code.**
 - ArrayList example - parallel streams improve performance.
 - LinkedList example - parallel streams reduce performance.
+
+
+## Parallel Streams - Final Computation Result Order :
+
+- The order of the collection depends on :
+  1. Type of Collection and
+  2. Spliterator Implementation of the collection
+
+
+- Example : ArrayList
+  - Type of Collection - **Ordered**
+  - Spliterator Implementation - **Ordered Spliterator Implementation**
+
+
+- Example : Set
+  - Type of Collection - **Unordered**
+  - Spliterator Implementation - **Unordered Spliterator Implementation**
+
+
+## Terminal Operations : Collect and Reduce
+
