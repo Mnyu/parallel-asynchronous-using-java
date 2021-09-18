@@ -13,6 +13,8 @@
 
 - This allows your code to run in parallel.
 - ParallelStreams are designed to solve **Data Parallelism**.
+- With Parallel streams, **Number of tasks that can run in parallel = No of cores.**
+- Find no of cores by using ```System.out.println(Runtime.getRuntime().availableProcessors());```
 
 ## Streams API : ```sequential()``` and ```parallel()``` functions
 
