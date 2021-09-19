@@ -65,7 +65,6 @@
 ![Image3](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/reduce-par.png)
 
 
-### Identity in Reduce
 ![Image4](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/reduce-identity.png)
 
 
