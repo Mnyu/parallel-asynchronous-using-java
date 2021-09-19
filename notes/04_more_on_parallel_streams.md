@@ -58,3 +58,46 @@
 
 ## Terminal Operations : Collect and Reduce
 
+![Image1](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/collect-reduce.png)
+
+![Image2](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/reduce-seq.png)
+
+![Image3](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/reduce-par.png)
+
+
+### Identity in Reduce
+![Image4](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/reduce-identity.png)
+
+
+## Parallel Stream Operations and Poor Performance
+
+1. Certain stream operators don't perform well when we run in parallel streams. Better to run in sequential.
+2. If we have any Boxing/Unboxing involved in the stream pipeline, it leads to poor performance when we use parallel streams.
+- Refer ParallelStreamPerformanceTest code.
+
+
+## Parallel Streams - Common Fork Join Pool
+
+![Image5](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/common-fork-join-1.png)
+
+![Image6](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/common-fork-join-2.png)
+
+![Image7](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/common-fork-join-3.png)
+
+![Image8](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/common-fork-join-4.png)
+
+
+## Parallel Streams - Parallelism & Threads
+
+![Image9](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/parallelism-1.png)
+
+![Image10](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/parallelism-2.png)
+
+
+## Parallel Streams - Summary
+
+![Image11](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/parallel-sum-1.png)
+
+![Image12](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/parallel-sum-2.png)
+
+![Image13](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/parallel-sum-3.png)

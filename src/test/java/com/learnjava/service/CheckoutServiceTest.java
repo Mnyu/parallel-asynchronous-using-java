@@ -6,6 +6,8 @@ import com.learnjava.domain.checkout.CheckoutStatus;
 import com.learnjava.util.DataSet;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.ForkJoinPool;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CheckoutServiceTest {
@@ -13,13 +15,22 @@ class CheckoutServiceTest {
     PriceValidatorService priceValidatorService = new PriceValidatorService();
     CheckoutService checkoutService = new CheckoutService(priceValidatorService);
 
-
     @Test
     void noOfCores() {
         // given
 
         // when
         System.out.println("No of cores : " + Runtime.getRuntime().availableProcessors());
+
+        // then
+    }
+
+    @Test
+    void parallelism() {
+        // given
+
+        // when
+        System.out.println("Parallelism : " + ForkJoinPool.getCommonPoolParallelism());
 
         // then
     }
@@ -34,6 +45,7 @@ class CheckoutServiceTest {
 
         // then
         assertEquals(CheckoutStatus.SUCCESS, checkoutResponse.getCheckoutStatus());
+        assertTrue(checkoutResponse.getFinalRate() > 0);
     }
 
     @Test
@@ -44,6 +56,21 @@ class CheckoutServiceTest {
 
         // given
         Cart cart = DataSet.createCart(17);
+
+        // when
+        CheckoutResponse checkoutResponse = checkoutService.checkout(cart);
+
+        // then
+        assertEquals(CheckoutStatus.FAILURE, checkoutResponse.getCheckoutStatus());
+    }
+
+    @Test
+    void modifyParallelism() {
+
+        System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "100");
+
+        // given
+        Cart cart = DataSet.createCart(100);
 
         // when
         CheckoutResponse checkoutResponse = checkoutService.checkout(cart);
