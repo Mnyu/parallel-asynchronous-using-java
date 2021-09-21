@@ -30,6 +30,10 @@
 ![Image5](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/comp-future-4.png)
 
 ![Image6](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/comp-future-5.png)
+
+## Example : Product Service using CompletableFuture
+
+![Image7](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/comp-future-6.png)
       
 
 
