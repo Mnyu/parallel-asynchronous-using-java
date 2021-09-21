@@ -36,6 +36,6 @@
 ![Image7](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/comp-future-6.png)
 
 
-## Combining Streams and CompletableFuture Example :
+## Combining Streams and CompletableFuture Example : Checking Performance
 
 ![Image8](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/comp-future-7.png)
