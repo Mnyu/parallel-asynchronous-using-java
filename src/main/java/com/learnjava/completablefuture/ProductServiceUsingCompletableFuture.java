@@ -109,7 +109,7 @@ public class ProductServiceUsingCompletableFuture {
         CompletableFuture<ProductInfo> cfProductInfo = CompletableFuture
                 .supplyAsync(() -> productInfoService.retrieveProductInfo(productId))
                 .thenApply(productInfo -> {
-                    productInfo.setProductOptions(updateInventory_approach2(productInfo));
+                    productInfo.setProductOptions(updateInventoryApproach2(productInfo));
                     return productInfo;
                 });
 
@@ -125,6 +125,11 @@ public class ProductServiceUsingCompletableFuture {
 
         Product product = cfProductInfo
                 .thenCombine(cfReview, (productInfo, review) -> new Product(productId, productInfo, review))
+                .whenComplete(((product1, throwable) -> {
+                    // Here we do not want to actually do recovery based on the business use-case,
+                    // but want to log what went wrong. That is why whenComplete() is used.
+                    LoggerUtil.log("Inside whenComplete() product : " + product1 + " and the exception is : " + throwable.getMessage());
+                }))
                 .join(); // BLOCK THE MAIN THREAD
 
         stopWatch.stop();
@@ -132,7 +137,7 @@ public class ProductServiceUsingCompletableFuture {
         return product;
     }
 
-    private List<ProductOption> updateInventory_approach2(ProductInfo productInfo) {
+    private List<ProductOption> updateInventoryApproach2(ProductInfo productInfo) {
         List<CompletableFuture<ProductOption>> completableFutures = productInfo.getProductOptions()
                 .stream()
                 .map(productOption -> {

@@ -4,6 +4,7 @@ import com.learnjava.domain.Product;
 import com.learnjava.service.InventoryService;
 import com.learnjava.service.ProductInfoService;
 import com.learnjava.service.ReviewService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -48,5 +49,22 @@ class ProductServiceUsingCompletableFutureExceptionTest {
                 .forEach(productOption -> assertNotNull(productOption.getInventory()));
         assertNotNull(product.getReview());
         assertEquals(0, product.getReview().getNoOfReviews());
+    }
+
+    @Test
+    void retrieveProductDetailsWithInventoryProductInfoServiceError() {
+        // Here we will test if exception block is executed or not
+        // given
+        String productId = "ABC123";
+        Mockito.when(pisMock.retrieveProductInfo(Mockito.any())).thenThrow(new RuntimeException("Exception mocked for product info retrieval"));
+        Mockito.when(rsMock.retrieveReviews(Mockito.any())).thenCallRealMethod();
+
+        // when
+
+
+        // then
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            pscf.retrieveProductDetailsWithInventoryApproach2(productId);
+        });
     }
 }
