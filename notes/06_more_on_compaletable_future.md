@@ -10,3 +10,10 @@
 
 ## CompletableFuture & User Defined ThreadPool using ExecutorService
 
+![Image4](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/comp-future-10.png)
+
+### Creating a User-Defined ThreadPool :
+
+    Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+    
+
