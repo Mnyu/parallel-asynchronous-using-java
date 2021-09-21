@@ -26,8 +26,12 @@
 ![Image7](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/comp-future-13.png)
 
 
-## CompletableFuture - allOf() and anyOf():
+## CompletableFuture - allOf() and anyOf() :
 
 ![Image8](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/comp-future-14.png)
 
 ![Image9](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/comp-future-15.png)
+
+## CompletableFuture - orTimeout() :
+
+![Image9](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/comp-future-16.png)
