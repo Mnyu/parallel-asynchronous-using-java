@@ -69,9 +69,39 @@ public class CompletableFutureHelloWorld {
             CommonUtil.delay(1000);
             return " Hi Completable future!!!";
         });
-        String hw =  hello.thenCombine(world, (h, w) -> h + w)
+        String hw =  hello
+                .thenCombine(world, (h, w) -> h + w)
                 .thenCombine(hi, (prev, curr) -> prev + curr)
                 .thenApply(String::toUpperCase)
+                .join();
+        CommonUtil.timeTaken();
+        return hw;
+    }
+
+    public String helloWorld_3_async_calls_logging() {
+        // The logging is added to see which threads execute thenCombine and
+        // thenApply in the CompletableFuture pipeline.
+        CommonUtil.stopWatchReset();
+        CommonUtil.startTimer();
+        CompletableFuture<String> hello = CompletableFuture.supplyAsync(() -> hws.hello());
+        CompletableFuture<String> world = CompletableFuture.supplyAsync(() -> hws.world());
+        CompletableFuture<String> hi = CompletableFuture.supplyAsync(() -> {
+            CommonUtil.delay(1000);
+            return " Hi Completable future!!!";
+        });
+        String hw =  hello
+                .thenCombine(world, (h, w) -> {
+                    LoggerUtil.log("thenCombine hello-world");
+                    return h + w;
+                })
+                .thenCombine(hi, (prev, curr) -> {
+                    LoggerUtil.log("thenCombine prev-curr");
+                    return prev + curr;
+                })
+                .thenApply(s -> {
+                    LoggerUtil.log("thenApply string to uppercase");
+                    return s.toUpperCase();
+                })
                 .join();
         CommonUtil.timeTaken();
         return hw;

@@ -50,6 +50,17 @@ class CompletableFutureHelloWorldTest {
     }
 
     @Test
+    void helloWorld_3_async_calls_logging() {
+        // given
+
+        // when
+        String helloWorld = cfhw.helloWorld_3_async_calls_logging();
+
+        // then
+        assertEquals("HELLO WORLD! HI COMPLETABLE FUTURE!!!", helloWorld);
+    }
+
+    @Test
     void helloWorld_thenCompose() {
         // given
         CommonUtil.stopWatchReset();

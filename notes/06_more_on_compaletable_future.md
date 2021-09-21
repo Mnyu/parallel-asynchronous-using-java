@@ -1,0 +1,12 @@
+
+![Image1](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/comp-future-exp1.png)
+
+## CompletableFuture Default ThreadPool
+
+![Image2](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/comp-future-8.png)
+
+![Image3](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/comp-future-9.png)
+
+
+## CompletableFuture & User Defined ThreadPool using ExecutorService
+
