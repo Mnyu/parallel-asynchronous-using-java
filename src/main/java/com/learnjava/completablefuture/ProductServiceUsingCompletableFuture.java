@@ -8,6 +8,7 @@ import com.learnjava.domain.Review;
 import com.learnjava.service.InventoryService;
 import com.learnjava.service.ProductInfoService;
 import com.learnjava.service.ReviewService;
+import com.learnjava.util.LoggerUtil;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -99,7 +100,7 @@ public class ProductServiceUsingCompletableFuture {
     }
 
     // Combining Stream & CompletableFuture
-    public Product retrieveProductDetailsWithInventory_approach2(String productId) {
+    public Product retrieveProductDetailsWithInventoryApproach2(String productId) {
         stopWatch.reset();
         stopWatch.start();
 
@@ -112,7 +113,15 @@ public class ProductServiceUsingCompletableFuture {
                     return productInfo;
                 });
 
-        CompletableFuture<Review> cfReview = CompletableFuture.supplyAsync(() -> reviewService.retrieveReviews(productId));
+        CompletableFuture<Review> cfReview = CompletableFuture
+                .supplyAsync(() -> reviewService.retrieveReviews(productId))
+                .exceptionally(ex -> {
+                    LoggerUtil.log("Handled the exception of reviewService : " + ex.getMessage());
+                    return Review.builder()
+                            .noOfReviews(0)
+                            .overallRating(0.0)
+                            .build();
+                });
 
         Product product = cfProductInfo
                 .thenCombine(cfReview, (productInfo, review) -> new Product(productId, productInfo, review))

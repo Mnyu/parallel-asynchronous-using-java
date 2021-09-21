@@ -71,12 +71,12 @@ class ProductServiceUsingCompletableFutureTest {
     }
 
     @Test
-    void retrieveProductDetailsWithInventory_approach2() {
+    void retrieveProductDetailsWithInventoryApproach2() {
         // given
         String productId = "ABC123";
 
         // when
-        Product product = pscf.retrieveProductDetailsWithInventory_approach2(productId);
+        Product product = pscf.retrieveProductDetailsWithInventoryApproach2(productId);
 
         // then
         assertNotNull(product);
