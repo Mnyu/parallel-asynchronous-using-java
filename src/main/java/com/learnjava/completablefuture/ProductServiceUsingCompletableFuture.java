@@ -117,7 +117,7 @@ public class ProductServiceUsingCompletableFuture {
                 .supplyAsync(() -> reviewService.retrieveReviews(productId))
                 .exceptionally(ex -> {
                     LoggerUtil.log("Handled the exception of reviewService : " + ex.getMessage());
-                    return Review.builder()
+                    return Review.builder()     // This is the recovery value provided.
                             .noOfReviews(0)
                             .overallRating(0.0)
                             .build();
