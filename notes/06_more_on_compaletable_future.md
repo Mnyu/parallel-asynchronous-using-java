@@ -17,3 +17,10 @@
     Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
     
 
+## Async() Overloaded Functions In CompletableFuture :
+
+![Image5](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/comp-future-11.png)
+
+![Image6](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/comp-future-12.png)
+
+![Image7](https://github.com/Mnyu/parallel-asynchronous-using-java/blob/practice/notes/images/comp-future-13.png)
