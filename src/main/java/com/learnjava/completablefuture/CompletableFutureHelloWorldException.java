@@ -25,6 +25,7 @@ public class CompletableFutureHelloWorldException {
         });
         String hw =  hello
                 .handle((prevResult, ex) -> {
+                    LoggerUtil.log("prev result : " + prevResult);
                     if(ex != null) {
                         LoggerUtil.log("Exception for HELLO is : " + ex.getMessage());
                         return "";
@@ -33,6 +34,7 @@ public class CompletableFutureHelloWorldException {
                 })
                 .thenCombine(world, (h, w) -> h + w)
                 .handle((prevResult, ex) -> {
+                    LoggerUtil.log("prev result : " + prevResult);
                     if(ex != null) {
                         LoggerUtil.log("Exception for WORLD is : " + ex.getMessage());
                         return "";
@@ -71,5 +73,36 @@ public class CompletableFutureHelloWorldException {
         CommonUtil.timeTaken();
         return hw;
     }
+
+    public String helloWorld_3_async_calls_whenComplete() {
+        CommonUtil.stopWatchReset();
+        CommonUtil.startTimer();
+        CompletableFuture<String> hello = CompletableFuture.supplyAsync(() -> hws.hello());
+        CompletableFuture<String> world = CompletableFuture.supplyAsync(() -> hws.world());
+        CompletableFuture<String> hi = CompletableFuture.supplyAsync(() -> {
+            CommonUtil.delay(1000);
+            return " Hi Completable future!!!";
+        });
+        String hw =  hello
+                .whenComplete((prevResult, ex) -> {
+                    LoggerUtil.log("prev result : " + prevResult);
+                    if(ex != null) {
+                        LoggerUtil.log("Exception for HELLO is : " + ex.getMessage());
+                    }
+                })
+                .thenCombine(world, (h, w) -> h + w)
+                .whenComplete((prevResult, ex) -> {
+                    LoggerUtil.log("prev result : " + prevResult);
+                    if(ex != null) {
+                        LoggerUtil.log("Exception for WORLD is : " + ex.getMessage());
+                    }
+                })
+                .thenCombine(hi, (prev, curr) -> prev + curr)
+                .thenApply(String::toUpperCase)
+                .join();
+        CommonUtil.timeTaken();
+        return hw;
+    }
+
 
 }
