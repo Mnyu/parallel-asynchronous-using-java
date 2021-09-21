@@ -1,6 +1,7 @@
 package com.learnjava.completablefuture;
 
 import com.learnjava.domain.Product;
+import com.learnjava.service.InventoryService;
 import com.learnjava.service.ProductInfoService;
 import com.learnjava.service.ReviewService;
 import com.learnjava.util.CommonUtil;
@@ -14,8 +15,9 @@ class ProductServiceUsingCompletableFutureTest {
 
     private ProductInfoService pis = new ProductInfoService();
     private ReviewService rs = new ReviewService();
+    private InventoryService is = new InventoryService();
 
-    private ProductServiceUsingCompletableFuture pscf = new ProductServiceUsingCompletableFuture(pis, rs);
+    private ProductServiceUsingCompletableFuture pscf = new ProductServiceUsingCompletableFuture(pis, rs, is);
 
     @Test
     void retrieveProductDetails() {
@@ -49,5 +51,39 @@ class ProductServiceUsingCompletableFutureTest {
         })
         .join();
         CommonUtil.timeTaken();
+    }
+
+    @Test
+    void retrieveProductDetailsWithInventory() {
+        // given
+        String productId = "ABC123";
+
+        // when
+        Product product = pscf.retrieveProductDetailsWithInventory(productId);
+
+        // then
+        assertNotNull(product);
+        assertTrue(product.getProductInfo().getProductOptions().size() > 0);
+        // Inventory Check
+        product.getProductInfo().getProductOptions()
+                .forEach(productOption -> assertNotNull(productOption.getInventory()));
+        assertNotNull(product.getReview());
+    }
+
+    @Test
+    void retrieveProductDetailsWithInventory_approach2() {
+        // given
+        String productId = "ABC123";
+
+        // when
+        Product product = pscf.retrieveProductDetailsWithInventory_approach2(productId);
+
+        // then
+        assertNotNull(product);
+        assertTrue(product.getProductInfo().getProductOptions().size() > 0);
+        // Inventory Check
+        product.getProductInfo().getProductOptions()
+                .forEach(productOption -> assertNotNull(productOption.getInventory()));
+        assertNotNull(product.getReview());
     }
 }
