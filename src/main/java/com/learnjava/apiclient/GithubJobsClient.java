@@ -65,4 +65,27 @@ public class GithubJobsClient {
         CommonUtil.timeTaken();
         return gitHubPositions;
     }
+
+    public List<GitHubPosition> invokeGithubJobsAPIWithMultiplePageNumbersAsyncApproach2(List<Integer> pageNos, String description) {
+        CommonUtil.stopWatchReset();
+        CommonUtil.startTimer();
+
+        List<CompletableFuture<List<GitHubPosition>>> gitHubPositionsCFs = pageNos.stream()
+                .map(pageNo -> CompletableFuture.supplyAsync(() -> invokeGithubJobsAPIWithPageNumber(pageNo, description)))
+                .collect(Collectors.toList());
+
+        CompletableFuture<Void> voidCF = CompletableFuture.allOf(gitHubPositionsCFs.toArray(new CompletableFuture[0]));
+
+        // The below method will only get executed when all the CFs of gitHubPositionsCFs are completed.
+        // Then why are we using join() [blocking call] below as well?
+        // The reason is though CF is completed, but we want to get the result out of the CF, that is why join().
+        List<GitHubPosition> gitHubPositions = voidCF.thenApply(v -> gitHubPositionsCFs.stream()
+                        .map(CompletableFuture::join)
+                        .flatMap(ghPositions -> ghPositions.stream())
+                        .collect(Collectors.toList()))
+                .join();
+
+        CommonUtil.timeTaken();
+        return gitHubPositions;
+    }
 }
