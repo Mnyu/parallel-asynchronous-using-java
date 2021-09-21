@@ -58,4 +58,43 @@ class CompletableFutureHelloWorldExceptionTest {
         // then
         assertEquals("HELLO WORLD! HI COMPLETABLE FUTURE!!!", result);
     }
+
+    @Test
+    void helloWorld_3_async_calls_exceptionally() {
+        // given
+        Mockito.when(helloWorldService.hello()).thenCallRealMethod();
+        Mockito.when(helloWorldService.world()).thenCallRealMethod();
+
+        // when
+        String result = hwcfe.helloWorld_3_async_calls_exceptionally();
+
+        // then
+        assertEquals("HELLO WORLD! HI COMPLETABLE FUTURE!!!", result);
+    }
+
+    @Test
+    void helloWorld_3_async_calls_exceptionally2() {
+        // given
+        Mockito.when(helloWorldService.hello()).thenThrow(new RuntimeException("Trigger HELLO exception"));
+        Mockito.when(helloWorldService.world()).thenThrow(new RuntimeException("Trigger WORLD exception"));
+
+        // when
+        String result = hwcfe.helloWorld_3_async_calls_exceptionally();
+
+        // then
+        assertEquals(" HI COMPLETABLE FUTURE!!!", result);
+    }
+
+    @Test
+    void helloWorld_3_async_calls_exceptionally3() {
+        // given
+        Mockito.when(helloWorldService.hello()).thenThrow(new RuntimeException("Trigger exception"));
+        Mockito.when(helloWorldService.world()).thenCallRealMethod();
+
+        // when
+        String result = hwcfe.helloWorld_3_async_calls_exceptionally()  ;
+
+        // then
+        assertEquals(" WORLD! HI COMPLETABLE FUTURE!!!", result);
+    }
 }
